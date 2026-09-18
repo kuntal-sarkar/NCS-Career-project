@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
-import Profile from "./pages/profile";
+import Profile from "./pages/Profile";
 import ResumeJob from "./pages/ResumeJob";
 import Analysis from "./pages/Analysis";
 import InterviewSetup from "./pages/InterviewSetup";
