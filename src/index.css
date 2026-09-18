@@ -433,3 +433,263 @@ a {
     font-size: 28px;
   }
 }
+
+
+
+/* Feedback Page */
+.feedback-card {
+  width: min(900px, 92%);
+  margin: 30px auto 60px;
+  padding: 36px;
+  background: #ffffff;
+  border: 1px solid #e5eaf2;
+  border-radius: 24px;
+  box-shadow: 0 15px 45px rgba(30, 64, 175, 0.08);
+  color: #172554;
+}
+
+.feedback-card > h1 {
+  text-align: center;
+  font-size: 32px;
+  margin: 16px 0 8px;
+  color: #172554;
+}
+
+.feedback-card > p {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+.feedback-icon {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #2563eb;
+  background: #dbeafe;
+}
+
+.feedback-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px;
+  margin: 24px 0;
+  border-radius: 20px;
+  color: white;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+}
+
+.feedback-score span {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.feedback-score strong {
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+.feedback-score small {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.feedback-section {
+  padding: 22px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.feedback-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 20px;
+  color: #1e40af;
+}
+
+.feedback-section p,
+.feedback-section li {
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.feedback-section ul {
+  padding-left: 22px;
+  margin: 0;
+}
+
+.feedback-section li {
+  margin-bottom: 8px;
+}
+
+.feedback-card .primary-button {
+  width: 100%;
+  margin-top: 28px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.feedback-card .primary-button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 4%;
+  padding: 10px 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  background: white;
+  color: #1d4ed8;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .feedback-card {
+    padding: 22px;
+    margin-top: 16px;
+  }
+
+  .feedback-card > h1 {
+    font-size: 26px;
+  }
+
+  .feedback-score strong {
+    font-size: 40px;
+  }
+
+  .feedback-section h2 {
+    font-size: 18px;
+  }
+}
+
+
+.answer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.answer-item {
+  padding: 18px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.answer-item h3 {
+  margin: 0 0 12px;
+  color: #1e40af;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.answer-item p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+
+
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.dashboard-item {
+  padding: 22px;
+  background: #f8fafc;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  color: #2563eb;
+}
+
+.dashboard-item h3 {
+  color: #172554;
+  margin: 14px 0 8px;
+  font-size: 18px;
+}
+
+.dashboard-item p {
+  color: #334155;
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-item small {
+  color: #64748b;
+}
+
+@media (max-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/* Floating back button */
+.floating-back-button {
+  position: fixed;
+  top: 235px;
+  left: max(20px, calc((100vw - 1100px) / 2 - 70px));
+  z-index: 1000;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+
+  background: #ffffff;
+  color: #2563eb;
+
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.floating-back-button:hover {
+  background: #eff6ff;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.15);
+}
+
+@media (max-width: 768px) {
+  .floating-back-button {
+    top: 225px;
+    left: 14px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}

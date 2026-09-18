@@ -1,11 +1,19 @@
+
 import { BriefcaseBusiness } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <nav className="navbar">
       <div className="container nav-inner">
-
-        <div className="brand">
+        {/* Brand */}
+        <div
+          className="brand"
+          onClick={() => navigate("/")}
+          style={{ cursor: "pointer" }}
+        >
           <div className="brand-icon">
             <BriefcaseBusiness size={22} />
           </div>
@@ -16,18 +24,24 @@ function Navbar() {
           </div>
         </div>
 
+        {/* Navbar Actions */}
         <div className="nav-actions">
-          <select defaultValue="English">
+          <select defaultValue="English" aria-label="Select language">
             <option>English</option>
             <option>Hindi</option>
             <option>Bengali</option>
+            <option>Marathi</option>
+            <option>Tamil</option>
           </select>
 
-          <button className="btn btn-primary">
-            Sign In
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => navigate("/login")}
+          >
+            Sign In / Login
           </button>
         </div>
-
       </div>
     </nav>
   );
