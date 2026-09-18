@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,55 +13,62 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 
+const DEFAULT_SETUP = {
+  interviewType: "Technical",
+  difficulty: "Beginner",
+  duration: "10",
+  interviewMode: "voice",
+};
+
+function getSavedSetup() {
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem("interviewSetup") || "null"
+    );
+
+    return {
+      ...DEFAULT_SETUP,
+      ...(saved || {}),
+    };
+  } catch {
+    return DEFAULT_SETUP;
+  }
+}
+
 function InterviewSetup() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Saved settings ko load karo; pehli baar defaults use honge.
-  const [interviewType, setInterviewType] = useState(() => {
-    try {
-      const saved = JSON.parse(
-        localStorage.getItem("interviewSetup") || "null"
-      );
-      return saved?.interviewType || "Technical";
-    } catch {
-      return "Technical";
+  // Voice Mode se wapas aaye hain to saved settings load hongi.
+  // Analysis se aaye hain to defaults reset honge.
+  const preserveSetup = location.state?.preserveSetup === true;
+
+  const [initialSetup] = useState(() => {
+    if (preserveSetup) {
+      return getSavedSetup();
     }
+
+    localStorage.removeItem("interviewSetup");
+    return DEFAULT_SETUP;
   });
 
-  const [difficulty, setDifficulty] = useState(() => {
-    try {
-      const saved = JSON.parse(
-        localStorage.getItem("interviewSetup") || "null"
-      );
-      return saved?.difficulty || "Beginner";
-    } catch {
-      return "Beginner";
-    }
-  });
+  const [interviewType, setInterviewType] = useState(
+    initialSetup.interviewType
+  );
 
-  const [duration, setDuration] = useState(() => {
-    try {
-      const saved = JSON.parse(
-        localStorage.getItem("interviewSetup") || "null"
-      );
-      return saved?.duration || "10";
-    } catch {
-      return "10";
-    }
-  });
+  const [difficulty, setDifficulty] = useState(
+    initialSetup.difficulty
+  );
 
-  const [interviewMode, setInterviewMode] = useState(() => {
-    try {
-      const saved = JSON.parse(
-        localStorage.getItem("interviewSetup") || "null"
-      );
-      return saved?.interviewMode || "voice";
-    } catch {
-      return "voice";
-    }
-  });
+  const [duration, setDuration] = useState(
+    initialSetup.duration
+  );
 
-  // Har setting change hone par automatically save karo.
+  const [interviewMode, setInterviewMode] = useState(
+    initialSetup.interviewMode
+  );
+
+  // Har setting change par automatically save karo.
   useEffect(() => {
     const setup = {
       interviewType,
@@ -70,7 +77,10 @@ function InterviewSetup() {
       interviewMode,
     };
 
-    localStorage.setItem("interviewSetup", JSON.stringify(setup));
+    localStorage.setItem(
+      "interviewSetup",
+      JSON.stringify(setup)
+    );
   }, [interviewType, difficulty, duration, interviewMode]);
 
   // Page open hote hi top par scroll karo.
@@ -86,9 +96,12 @@ function InterviewSetup() {
       interviewMode,
     };
 
-    localStorage.setItem("interviewSetup", JSON.stringify(setup));
+    localStorage.setItem(
+      "interviewSetup",
+      JSON.stringify(setup)
+    );
 
-    // Har nayi interview ki shuruaat fresh answers se ho.
+    // Har nayi interview fresh answers se start hogi.
     localStorage.removeItem("interviewAnswers");
 
     navigate("/mock-interview");
